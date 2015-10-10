@@ -18,5 +18,6 @@ Meteor.methods({
   'approveClubRequest': function(request){
   	//if this.userId is an owner, add the requesting user
   	//to the clubs members array
+  	var clubRequsted = Club.find({request});
   }
 });
