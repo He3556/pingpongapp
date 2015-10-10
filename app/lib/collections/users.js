@@ -4,7 +4,7 @@ Schema.UserProfile = new SimpleSchema({
     type: String,
     optional: false
   }
-}
+});
 
 Schema.User = new SimpleSchema({
   username: {
@@ -14,6 +14,9 @@ Schema.User = new SimpleSchema({
   emails: {
     type: Array,
     optional: true
+  },
+  "emails.$": {
+    type: Object
   },
   "emails.$.address": {
     type: String,
@@ -44,12 +47,12 @@ Schema.User = new SimpleSchema({
     optional: false,
     label: 'Score'
   }
-}
+});
 
-Accounts.users.attachSchema(Schema.User);
+Meteor.users.attachSchema(Schema.User);
 
 if (Meteor.isServer) {
-  Accounts.users.allow({
+  Meteor.users.allow({
     insert: function (userId, doc) {
       return false;
     },
@@ -63,7 +66,7 @@ if (Meteor.isServer) {
     }
   });
 
-  Accounts.users.deny({
+  Meteor.users.deny({
     insert: function (userId, doc) {
       return true;
     },

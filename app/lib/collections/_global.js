@@ -1,1 +1,1 @@
-var Schemas = {};
+Schema = {};

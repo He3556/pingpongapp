@@ -1,6 +1,6 @@
 Clubs = new Mongo.Collection('clubs');
 
-Schemas.Club = new SimpleSchema({
+Schema.Club = new SimpleSchema({
   createdAt: {
     type: Date,
     label: "Created At"
@@ -19,18 +19,18 @@ Schemas.Club = new SimpleSchema({
     type: Array,
     label: 'Members'
   },
-  "members.$" {
+  "members.$": {
     type: Object
-  }
+  },
   "members.$.user": {
     type: String
-  }
+  },
   "members.$.rating": {
     type: Number
   }
 });
 
-Clubs.attachSchema(Schemas.Club);
+Clubs.attachSchema(Schema.Club);
 
 if (Meteor.isServer) {
   Clubs.allow({
