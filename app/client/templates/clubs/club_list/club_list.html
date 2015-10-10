@@ -1,5 +1,10 @@
 <template name="ClubList">
+  {{> loginButtons}}
   <div class="club-list">
     <h1>Clubs</h1>
+
+    {{#each clubs}}
+    <h2>{{name}}</h2> {{memberCount}}
+    {{/each}}
   </div>
 </template>

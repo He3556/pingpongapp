@@ -2,7 +2,7 @@
 Schema.UserProfile = new SimpleSchema({
   name: {
     type: String,
-    optional: false
+    optional: true
   }
 });
 
@@ -41,11 +41,6 @@ Schema.User = new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true
-  },
-  score: {
-    type: Number,
-    optional: false,
-    label: 'Score'
   }
 });
 
