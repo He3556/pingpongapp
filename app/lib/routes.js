@@ -10,3 +10,10 @@ Router.route('/club/create', {
   controller: 'ClubsController',
   where: 'client'
 });
+
+Router.route('/club/:slug', {
+  name: 'clubDashboard',
+  controller: 'ClubDashboardController',
+  where: 'client'
+}
+
