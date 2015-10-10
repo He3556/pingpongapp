@@ -21,3 +21,6 @@ insecure                # Allow all DB writes from clients (for prototyping)
 iron:router
 aldeed:collection2
 alanning:roles
+aldeed:autoform
+fourseven:scss
+reywood:bootstrap3-sass

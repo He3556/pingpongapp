@@ -3,7 +3,19 @@ Clubs = new Mongo.Collection('clubs');
 Schema.Club = new SimpleSchema({
   createdAt: {
     type: Date,
-    label: "Created At"
+    label: "Created At",
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date};
+      } else {
+        this.unset();
+      }
+    },
+    autoform: {
+      omit: true
+    }
   },
   name: {
     type: String,

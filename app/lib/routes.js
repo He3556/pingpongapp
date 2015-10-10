@@ -1,6 +1,12 @@
 
 Router.route('/', {
-  name: 'home',
-  controller: 'HomeController',
+  name: 'clubList',
+  controller: 'ClubsController',
+  where: 'client'
+});
+
+Router.route('/club/create', {
+  name: 'clubCreate',
+  controller: 'ClubsController',
   where: 'client'
 });
