@@ -14,6 +14,8 @@ ClubsController = RouteController.extend({
   // return Meteor.subscribe('post', this.params._id);
   
   waitOn: function () {
+    Meteor.subscribe('allClubs');
+    Meteor.subscribe('myClubs');
   },
   
   // A data function that can be used to automatically set the data context for
