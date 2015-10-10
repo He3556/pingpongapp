@@ -21,7 +21,21 @@ Schema.Club = new SimpleSchema({
     type: String,
     label: 'Name',
     max: 100,
-    optional: false
+    optional: false,
+    index: 1,
+    unique: true
+  },
+  slug: {
+    type: String,
+    label: 'Slug',
+    autoform: {
+      omit: true
+    },
+    autoValue: function() {
+      if (this.isInsert) {
+        return slugify(this.field('name'));
+      }
+    }
   },
   owners: {
     type: [String],
@@ -64,7 +78,6 @@ Schema.Club = new SimpleSchema({
     denyInsert: true,
     autoValue: function() {
       var members = this.field('members').value;
-      console.log(members);
       if (!members) {
         if (this.isInsert) {
           return 0;
@@ -110,3 +123,13 @@ if (Meteor.isServer) {
     }
   });
 }
+
+var slugify = function(s) {
+  return s.toLowerCase().trim().replace(/[^a-z]+/g, '-');
+}
+
+Meteor.startup(function() {
+  Clubs.find({ slug: null }).forEach(function(club) {
+    Clubs.update(club._id, {$set: {slug: slugify(club.name)}});
+  });
+});
