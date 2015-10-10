@@ -20,25 +20,61 @@ Schema.Club = new SimpleSchema({
   name: {
     type: String,
     label: 'Name',
-    max: 100
+    max: 100,
+    optional: false
   },
   owners: {
     type: [String],
     label: "Owners",
-    optional: false
+    optional: false,
+    autoValue: function() {
+      if (this.isInsert) {
+        return [this.userId];
+      } else if (this.isUpsert) {
+        return {$setOnInsert: [this.userId]};
+      }
+    }
   },
   members: {
     type: Array,
-    label: 'Members'
+    label: 'Members',
+    optional: false,
+    autoValue: function() {
+      if (this.isInsert) {
+        return [this.userId];
+      } else if (this.isUpsert) {
+        return {$setOnInsert: [this.userId]};
+      }
+    }
   },
   "members.$": {
     type: Object
   },
   "members.$.user": {
-    type: String
+    type: String,
+    optional: false
   },
   "members.$.rating": {
-    type: Number
+    type: Number,
+    optional: false
+  },
+  memberCount: {
+    type: Number,
+    label: "Member Count",
+    denyInsert: true,
+    autoValue: function() {
+      var members = this.field('members').value;
+      console.log(members);
+      if (!members) {
+        if (this.isInsert) {
+          return 0;
+        } else {
+          this.unset();
+        }
+      } else {
+        return members.length;
+      }
+    }
   }
 });
 
