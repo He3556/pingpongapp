@@ -1,10 +1,18 @@
 <template name="ClubList">
-  {{> loginButtons}}
-  <div class="club-list">
-    <h1>Clubs</h1>
-
-    {{#each clubs}}
-    <h2>{{name}}</h2> {{memberCount}}
-    {{/each}}
+  <div class="club-list container">
+    <div class="row">
+        <h1>Clubs</h1>
+        {{#if currentUser}}
+            <a href="{{pathFor route="clubCreate"}}"><h2>Create Club</h2></a>
+            <a href="{{pathFor route="userProfile"}}"><h2>Profile</h2></a>            
+        {{else}}
+            {{> loginButtons}}
+        {{/if}}
+    </div>
+    <div class="row">
+        {{#each clubs}}
+        <h2>{{name}}</h2> {{memberCount}}
+        {{/each}}
+    </div>
   </div>
 </template>

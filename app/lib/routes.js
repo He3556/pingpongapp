@@ -15,5 +15,4 @@ Router.route('/club/:slug', {
   name: 'clubDashboard',
   controller: 'ClubDashboardController',
   where: 'client'
-}
-
+});
