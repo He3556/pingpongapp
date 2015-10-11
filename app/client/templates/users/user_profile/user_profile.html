@@ -1,0 +1,14 @@
+<template name="UserProfile">
+  <div class="user-profile container">
+    <h1>User Profile: {{profile.name}}</h1>
+    <h2>Clubs</h2>
+
+    <ul>
+      {{#each clubs}}
+      <li>{{name}}</li>
+      {{/each}}
+    </ul>
+
+    {{#linkTo route="userProfileEdit" class="btn btn-default"}}Edit{{/linkTo}}
+  </div>
+</template>

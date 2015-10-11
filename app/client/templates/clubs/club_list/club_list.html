@@ -6,7 +6,7 @@
         </div>
         <div id="menu-items" class="col-xs-9">
             {{#if currentUser}}
-                <a href=""><h2>Profile</h2></a> 
+                <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a> 
                 <a href="{{pathFor route="clubCreate"}}"><h2>Create Club</h2></a>        
             {{else}}
                 {{> loginButtons}}
