@@ -20,6 +20,13 @@ Router.route('/club/:slug', {
   where: 'client'
 });
 
+Router.route('/club/:slug/join', {
+  name: 'joinClub',
+  action: function() {
+  },
+  where: 'client'
+});
+
 Router.route('/user-profile', {
   name: 'myUserProfile',
   template: 'UserProfile',

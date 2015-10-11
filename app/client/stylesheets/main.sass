@@ -109,6 +109,11 @@ a
     -moz-box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.3)
     min-height: 57px
     
+    > h2
+      text-align: center
+      font-weight: 600
+      padding-top: 1em
+    
 .long-block
     @extend .block
     form
@@ -213,6 +218,16 @@ a
         &:last-child a
             color: #E95A3C
             
+.pending-members
+    ul
+        list-style-type: none
+        padding: 0
+        li
+            font-size: 1.5em
+            padding: 1em
+            a
+              cursor: pointer
+
 .recent-matches
     @extend .leaderboard
     h3:first-child

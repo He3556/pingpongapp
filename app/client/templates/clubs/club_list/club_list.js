@@ -2,6 +2,14 @@
 /* ClubList: Event Handlers */
 /*****************************************************************************/
 Template.ClubList.events({
+  'click .join': function() {
+    Meteor.call('requestMembership', this, function(error){
+      if (error)
+        Flash.warning(error.message);
+      else
+        Flash.info("Your request has been sent");
+    });
+  }
 });
 
 /*****************************************************************************/
