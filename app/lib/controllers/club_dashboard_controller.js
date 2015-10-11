@@ -29,7 +29,7 @@ ClubDashboardController = RouteController.extend({
     }
     return {
       club: club,
-      me: club.members.filter(function(m){return m.user = Meteor.userId();}).pop(),
+      me: club.members.filter(function(m){return m.user === Meteor.userId();}).pop(),
       leaders:
         club.members.sort(function(a, b) {
           return a.rating - b.rating;

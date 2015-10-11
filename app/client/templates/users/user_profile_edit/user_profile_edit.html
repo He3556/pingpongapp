@@ -9,11 +9,8 @@
         {{/if}}
     </div>
         <div id="menu-items" class="col-sm-5">
-            {{#if currentUser}}
                 <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a>       
-            {{else}}
                 {{> loginButtons}}
-            {{/if}}
         </div>
     </div>    
     <div class="row long-block">
