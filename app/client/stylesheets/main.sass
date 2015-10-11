@@ -1,4 +1,29 @@
-@import '{reywood:bootstrap3-sass}/bootstrap'
+@import '{reywood:bootstrap3-sass}/bootstrap';
+
+=mq($breakpoint)
+  $mq-xs: "(max-width: 767px)"
+  $mq-sm: "(min-width: 768px)"
+  $mq-md: "(min-width: 992px)"
+  $mq-lg: "(min-width: 1200px)"
+  @if $breakpoint == xs
+    @media #{$mq-xs}
+      @content
+  @else if $breakpoint == sm
+    @media #{$mq-sm}
+      @content
+  @else if $breakpoint == md
+    @media #{$mq-md}
+      @content
+  @else if $breakpoint == lg
+    @media #{$mq-lg}
+      @content
+
+$black: #292930
+$white: #FCFCFC
+$blue: #439AE3
+    
+html
+    min-height: 100%
 
 body
     background: -moz-linear-gradient(-45deg, #eb7daf 0%, #439be3 100%)
@@ -8,16 +33,64 @@ body
     background: -ms-linear-gradient(-45deg, #eb7daf 0%, #439be3 100%)
     background: linear-gradient(135deg, #eb7daf 0%, #439be3 100%)
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eb7daf', endColorstr='#439be3', GradientType=1 )
+    background-size: cover
     font-family: 'Josefin Sans', sans-serif
-    color: #333
+    color: #fff
     
 h1
-    font-weight: 700
-    letter-spacing: 2px
-h2
     font-weight: 500
+    letter-spacing: 2px
+    font-size: 2em
+    @include mq(sm)
+        font-size: 3em
+        
+h2
+    font-weight: 300
+    font-size: 1.25em
+    @include mq(sm)
+        font-size: 2em
     
 a
     text-decoration: none
-    &:hover
+    color: $white
+    &:hover, &:focus
         text-decoration: none
+        color: darken($white, 20%)
+
+.club-list, .club-create
+    max-width: 80%
+
+#nav
+    background-color: #292930
+    border-radius: 5px
+    margin-top: 5em
+    h1
+        margin-left: 45%
+    
+#menu-items a
+    float: right
+    margin-left: 1em
+    margin-top: .35em
+    @include mq(sm)
+        margin-left: 3em
+        margin-top: .5em
+        
+#new-club
+    @extend #nav
+    h1
+        margin-left: 13% !important
+        
+.custom-form
+    background-color: $white
+    border-radius: 5px
+    color: $black
+    margin-top: 2em
+    form
+        margin: 2em 3em
+    label
+        font-size: 2em
+    button
+        font-size: 1.25em
+        background-color: $blue
+        border: none
+        

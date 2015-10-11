@@ -1,3 +1,11 @@
+AutoForm.hooks({
+  insertClubForm: {
+    onSuccess: function(formType, result) {
+      Router.go('clubDashboard', Clubs.findOne(result));
+    }
+  }
+});
+
 /*****************************************************************************/
 /* ClubCreate: Event Handlers */
 /*****************************************************************************/

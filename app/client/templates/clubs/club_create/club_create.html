@@ -1,6 +1,19 @@
 <template name="ClubCreate">
   <div class="club-create container">
-    <h1>Create New Club</h1>
-    {{> quickForm collection="Clubs" id="insertClubForm" type="insert" buttonContent="Create" omitFields="owners,members"}}
+    <div id="new-club" class="row">
+        <div class="col-xs-6">
+            <h1>Create New Club</h1>
+        </div>
+        <div id="menu-items" class="col-xs-5">
+            {{#if currentUser}}
+                <a href=""><h2>Profile</h2></a>       
+            {{else}}
+                {{> loginButtons}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="row custom-form">
+        {{> quickForm collection="Clubs" id="insertClubForm" type="insert" buttonContent="Create" omitFields="owners,members"}}
+    </div> 
   </div>
 </template>
