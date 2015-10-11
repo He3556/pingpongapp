@@ -3,6 +3,16 @@ Schema.UserProfile = new SimpleSchema({
   name: {
     type: String,
     optional: true
+  },
+  image: {
+    type: String,
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images',
+        label: 'Choose image'
+      }
+    }
   }
 });
 
