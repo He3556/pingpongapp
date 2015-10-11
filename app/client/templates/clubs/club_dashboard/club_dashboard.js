@@ -8,6 +8,9 @@ Template.ClubDashboard.events({
 /* ClubDashboard: Helpers */
 /*****************************************************************************/
 Template.ClubDashboard.helpers({
+  image: function() {
+    return Images.findOne(this.profile.image);
+  }
 });
 
 /*****************************************************************************/

@@ -16,9 +16,9 @@
       <div class="col-sm-7">
         {{#with me}}
         <div class="member-profile">
-          <div class="media user-profile-image"><img src="{{image.url}}"></div>
-          <h3>{{profile.name}}</h3>
-          <h3>{{rating}}</h3>
+            <div class="col-sm-3 media user-profile-image"><img src="{{image.url}}"></div>
+            <div class="col-sm-7"><h3>{{profile.name}}</h3><h4>{{numberizer rank}} place</h4></div>
+            <div class="col-sm-2"><h3>{{rating}}</h3><h4>points</h4></div>
         </div>
         {{else}}
         <div class="not-a-member-profile">
