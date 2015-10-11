@@ -31,12 +31,14 @@ ClubDashboardController = RouteController.extend({
       club: club,
       me: club.members.filter(function(m){return m.user = Meteor.userId();}).pop(),
       leaders:
-        club.members.map(function(member) {
-          member.profile = Meteor.users.findOne(member.user).profile;
-          return member;
-        }).sort(function(a, b) {
+        club.members.sort(function(a, b) {
           return a.rating - b.rating;
+        }).map(function(member, index) {
+          member.profile = Meteor.users.findOne(member.user).profile;
+          member.rank = index + 1;
+          return member;
         })
+        
     };
   },
   
