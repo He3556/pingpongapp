@@ -21,7 +21,15 @@
             </div>
             <div id="club-details">
                 <h3>{{pluralize memberCount "Player"}}</h3>
-                <h3>Join</h3>
+                {{#if currentUser}}
+                {{#unless (isMember)}}
+                  {{#if isPending}}
+                    <h3>pending</h3>
+                  {{else}}
+                    <h3><button class="join">Join</button></h3>
+                  {{/if}}
+                {{/unless}}
+                {{/if}}
             </div>
         </div>
         {{/each}}

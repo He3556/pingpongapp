@@ -38,3 +38,8 @@ Router.route('/user-profile/:_id/edit', {
   controller: 'UserProfileController',
   where: 'client'
 });
+
+Router.route('/match/:_id', {
+  name: 'match',
+  where: 'client'
+});

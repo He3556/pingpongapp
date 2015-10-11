@@ -23,3 +23,51 @@ Template.registerHelper('numberizer', function(n) {
     return n + 'th';
   }
 });
+
+UI.registerHelper('isClubOwner', function(club, userId) {
+  if (!club) {
+    club = this;
+  } else if (typeof club === 'string') {
+    club = Clubs.findOne(club);
+  }
+
+  if (typeof userId !== 'string') {
+    userId = Meteor.userId();
+  }
+
+  return club.owners.indexOf(userId) != -1;
+});
+
+UI.registerHelper('isMember', function(club, userId) {
+  if (!club) {
+    club = this;
+  } else if (typeof club === 'string') {
+    club = Clubs.findOne(club);
+  }
+
+  if (typeof userId != 'string') {
+    userId = Meteor.userId();
+  }
+
+  return club.members.filter(function(member){
+    return member.user === userId;
+  }).length > 0;
+});
+
+UI.registerHelper('isPending', function(club, userId) {
+  if (!club) {
+    club = this;
+  } else if (typeof club === 'string') {
+    club = Clubs.findOne(club);
+  }
+
+  if (typeof userId !== 'string') {
+    userId = Meteor.userId();
+  }
+
+  return JoinRequests.find({
+    user: userId,
+    club: club._id,
+    status: 'pending'
+  }).count() > 0;
+});

@@ -1,31 +1,23 @@
 /*****************************************************************************/
-/* ClubList: Event Handlers */
+/* Match: Event Handlers */
 /*****************************************************************************/
-Template.ClubList.events({
-  'click .join': function() {
-    Meteor.call('requestMembership', this, function(error){
-      if (error)
-        Flash.warning(error.message);
-      else
-        Flash.info("Your request has been sent");
-    });
-  }
+Template.Match.events({
 });
 
 /*****************************************************************************/
-/* ClubList: Helpers */
+/* Match: Helpers */
 /*****************************************************************************/
-Template.ClubList.helpers({
+Template.Match.helpers({
 });
 
 /*****************************************************************************/
-/* ClubList: Lifecycle Hooks */
+/* Match: Lifecycle Hooks */
 /*****************************************************************************/
-Template.ClubList.onCreated(function () {
+Template.Match.onCreated(function () {
 });
 
-Template.ClubList.onRendered(function () {
+Template.Match.onRendered(function () {
 });
 
-Template.ClubList.onDestroyed(function () {
+Template.Match.onDestroyed(function () {
 });

@@ -1,54 +1,60 @@
-Requests = new Mongo.Collection('requests');
+Matches = new Mongo.Collection('matches');
 
-Schema.Request = new SimpleSchema({
+Schema.Match = new SimpleSchema({
   club: {
+    type: String,
+    index: 1
+  },
+  players: {
+    type: Array,
+    index: 1
+  },
+  'players.$': {
+    type: Object
+  },
+  'players.$.user': {
     type: String
   },
-  challenger: {
-    type: String
+  'players.$.expected': {
+    type: Number,
+    decimal: true
   },
-  opponent: {
-    type: String
+  winner: {
+    type: String,
+    optional: true
   },
   status: {
     type: String,
+    index: 1,
     autoValue: function() {
       if (this.isInsert) {
-        return "pending";
+        return "active";
       }
     }
   },
   createdAt: {
     type: Date,
+    index: 1,
     denyUpdate: true,
     autoValue: function() {
       if (this.isInsert) {
         return new Date;
       }
     }
+  },
+  finishedAt: {
+    index: 1,
+    type: Date,
+    optional: true
   }
 });
 
-Requests.attachSchema(Schema.Request);
+Matches.attachSchema(Schema.Match);
 
 if (Meteor.isServer) {
-  Requests.allow({
+  Matches.allow({
     insert: function (userId, doc) {
-      if (userId !== doc.challenger)
-        return false;
-
-      var club = Clubs.findOne({
-        _id: doc.club,
-        $and: [
-          { "members.user": doc.challenger },
-          { "members.user": doc.opponent },
-        ]
-      });
-      if (!club)
-        return false;
-
-      return true;
-
+      return false;
     },
 
     update: function (userId, doc, fieldNames, modifier) {
@@ -60,7 +66,7 @@ if (Meteor.isServer) {
     }
   });
 
-  Requests.deny({
+  Matches.deny({
     insert: function (userId, doc) {
       return true;
     },
