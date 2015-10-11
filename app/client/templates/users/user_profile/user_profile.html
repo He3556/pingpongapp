@@ -2,7 +2,11 @@
   <div class="user-profile container">
     <div id="nav" class="row">
       <div class="col-sm-6">
-        <h1>Your Profile</h1>
+        {{#if isEquals _id currentUser._id}}
+            <h1>Your Profile</h1>
+        {{else}}
+            <h1>{{profile.name}}'s Profile</h1>
+        {{/if}}
       </div>
       <div id="menu-items" class="col-sm-5">
           {{#linkTo route="userProfileEdit"}}<h2>Edit</h2>{{/linkTo}}

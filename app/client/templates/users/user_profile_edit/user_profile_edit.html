@@ -2,7 +2,11 @@
   <div class="user-profile-edit container">
   <div id="nav" class="row">
     <div class="col-sm-6">
-      <h1>Edit Your Account</h1>
+        {{#if isEquals _id currentUser._id}}
+            <h1>Edit Your Account</h1>
+        {{else}}
+            <h1>{{profile.name}}'s Account</h1>
+        {{/if}}
     </div>
         <div id="menu-items" class="col-sm-5">
             {{#if currentUser}}
