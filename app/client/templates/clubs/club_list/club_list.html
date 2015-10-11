@@ -15,7 +15,15 @@
     </div>
     <div class="row">
         {{#each clubs}}
-        <h2>{{#linkTo route="clubDashboard"}}{{name}}{{/linkTo}}</h2> {{memberCount}}
+        <div class="long-block">
+            <div id="club-name">
+                <h3>{{#linkTo route="clubDashboard"}}{{name}}{{/linkTo}}</h3>
+            </div>
+            <div id="club-details">
+                <h3>{{pluralize memberCount "Player"}}</h3>
+                <h3>Join</h3>
+            </div>
+        </div>
         {{/each}}
     </div>
   </div>
