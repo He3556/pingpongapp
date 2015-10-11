@@ -104,6 +104,7 @@ Meteor.methods({
     challenger = club.members.find(function(member) {
       return member.user === request.challenger;
     });
+
     opponent = club.members.find(function(member) {
       return member.user === request.opponent;
     });

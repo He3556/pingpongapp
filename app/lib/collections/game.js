@@ -1,8 +1,8 @@
-Game = new Mongo.Collection('game');
+Games = new Mongo.Collection('games');
 
 
 if (Meteor.isServer) {
-  Game.allow({
+  Games.allow({
     insert: function (userId, doc) {
       return false;
     },
@@ -16,7 +16,7 @@ if (Meteor.isServer) {
     }
   });
 
-  Game.deny({
+  Games.deny({
     insert: function (userId, doc) {
       return true;
     },
