@@ -23,7 +23,18 @@ ClubDashboardController = RouteController.extend({
   // return Posts.findOne({_id: this.params._id});
   
   data: function () {
-    return Clubs.findOne({slug: this.params.slug});
+    var club = Clubs.findOne({slug: this.params.slug});
+    return {
+      club: club,
+      me: club.members.filter(function(m){return m.user = Meteor.userId();}).pop(),
+      leaders:
+        club.members.map(function(member) {
+          member.profile = Meteor.users.findOne(member.user).profile;
+          return member;
+        }).sort(function(a, b) {
+          return a.rating - b.rating;
+        })
+    };
   },
   
   // You can provide any of the hook options
