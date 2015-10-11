@@ -64,7 +64,8 @@ a
         color: darken($white, 20%)
 
 .container
-    max-width: 80% !important    
+    @include mq(sm)
+        max-width: 80% !important    
 
 #nav
     background-color: #292930
@@ -211,6 +212,11 @@ a
             font-weight: 700
         &:last-child a
             color: #E95A3C
+            
+.recent-matches
+    @extend .leaderboard
+    h3:first-child
+        margin-left: 13%
             
 .alert
     position: fixed
