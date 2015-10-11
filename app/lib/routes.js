@@ -16,3 +16,22 @@ Router.route('/club/:slug', {
   controller: 'ClubDashboardController',
   where: 'client'
 });
+
+Router.route('/user-profile', {
+  name: 'myUserProfile',
+  template: 'UserProfile',
+  controller: 'UserProfileController',
+  where: 'client'
+});
+
+Router.route('/user-profile/:_id', {
+  name: 'userProfile',
+  controller: 'UserProfileController',
+  where: 'client'
+});
+
+Router.route('/user-profile/:_id/edit', {
+  name: 'userProfileEdit',
+  controller: 'UserProfileController',
+  where: 'client'
+});

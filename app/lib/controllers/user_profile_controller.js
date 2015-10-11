@@ -1,4 +1,4 @@
-ClubsController = RouteController.extend({
+UserProfileController = RouteController.extend({
   
   // A place to put your subscriptions
   // this.subscribe('items');
@@ -14,10 +14,6 @@ ClubsController = RouteController.extend({
   // return Meteor.subscribe('post', this.params._id);
   
   waitOn: function () {
-    return [
-      Meteor.subscribe('allClubs'),
-      Meteor.subscribe('myClubs')
-    ];
   },
   
   // A data function that can be used to automatically set the data context for
@@ -27,9 +23,10 @@ ClubsController = RouteController.extend({
   // return Posts.findOne({_id: this.params._id});
   
   data: function () {
-    return {
-      clubs: function() { return Clubs.find(); },
+    if (this.params._id) {
+      return Meteor.users.findOne(this.params._id);
     }
+    return Meteor.users.findOne(Meteor.userId());
   },
   
   // You can provide any of the hook options

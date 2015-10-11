@@ -1,0 +1,7 @@
+<template name="UserProfileEdit">
+  <div class="user-profile-edit container">
+    <h1>Edit Account: {{profile.name}}</h1>
+
+    {{>quickForm doc=this collection="Meteor.users" id="userProfile" omitFields="services, roles"}}
+  </div>
+</template>

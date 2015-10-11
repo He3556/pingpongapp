@@ -23,10 +23,18 @@ Schema.User = new SimpleSchema({
     regEx: SimpleSchema.RegEx.Email
   },
   "emails.$.verified": {
-    type: Boolean
+    type: Boolean,
+    autoform: { omit: true }
   },
   createdAt: {
-    type: Date
+    type: Date,
+    denyUpdate: true,
+    autoform: { omit: true },
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date;
+      }
+    }
   },
   profile: {
     type: Schema.UserProfile,
