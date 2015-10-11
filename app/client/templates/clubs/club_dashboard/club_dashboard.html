@@ -6,7 +6,7 @@
       </div>
       <div id="menu-items" class="col-sm-5">
             {{#if currentUser}}
-                <a href=""><h2>Profile</h2></a> 
+                <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a> 
                 <a href=""><h2>Invite Players</h2></a>        
             {{else}}
                 {{> loginButtons}}
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div id="club-dashboard-content" class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-7">
         {{#with me}}
         <div class="member-profile">
           <h3>{{profile.name}}</h3>
@@ -31,7 +31,6 @@
               <div class="col-xs-4"><h3><a href="">Challenge</a></h3></div>
             </div>
             {{/each}}
-          <h4>See More</h4>
         </div>
       </div>
     </div>

@@ -1,14 +1,24 @@
 <template name="UserProfile">
   <div class="user-profile container">
-    <h1>User Profile: {{profile.name}}</h1>
-    <h2>Clubs</h2>
-
-    <ul>
-      {{#each clubs}}
-      <li>{{name}}</li>
-      {{/each}}
-    </ul>
-
-    {{#linkTo route="userProfileEdit" class="btn btn-default"}}Edit{{/linkTo}}
+    <div id="nav" class="row">
+      <div class="col-sm-6">
+        <h1>Your Profile</h1>
+      </div>
+      <div id="menu-items" class="col-sm-5">
+          {{#linkTo route="userProfileEdit"}}<h2>Edit</h2>{{/linkTo}}
+      </div>
+    </div>
+    <div id="club-dashboard-content" class="row">
+      <div class="col-sm-12">
+        <div class="leaderboard">
+          <h2>My Clubs</h2>
+            <ul>
+              {{#each clubs}}
+                <li>{{#linkTo route="clubDashboard"}}{{name}}{{/linkTo}}</li>
+              {{/each}}
+            </ul>
+        </div>
+      </div>    
+    </div>
   </div>
 </template>
