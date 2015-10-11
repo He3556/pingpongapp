@@ -75,11 +75,20 @@
           {{/if}}
           <div class="recent-matches">
             <h2>Recent Matches</h2>
+            {{#each recentMatches}}
             <div class="recent-matches-list row">
-              <!--       Add logic - If there are matches show this, if not show default statement         -->
-              <div class="col-xs-5"><h3>Oct. {{numberizer 12}}</h3></div>
-              <div class="col-xs-7"><h3>Nick beat Bryan</h3></div>
+              <div class="col-xs-5"><h3>{{dateFormat completedAt}}</h3></div>
+              <div class="col-xs-7"><h3>
+                  {{#if winner}}
+                  {{winner}} beat {{loser}}
+                  {{else}}
+                  {{players.[0].profile.name}} tied {{players.[1].profile.name}}
+                  {{/if}}
+              </h3></div>
             </div>
+            {{else}}
+                <p class="text-center"> No recent matches. </p>
+            {{/each}}
           </div>
       </div>
     </div>

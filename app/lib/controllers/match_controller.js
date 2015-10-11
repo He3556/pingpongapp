@@ -16,7 +16,11 @@ MatchController = RouteController.extend({
   waitOn: function () {
     matchId = this.params._id;
     return { ready: function() {
-      return Matches.findOne(matchId);
+      var match =  Matches.findOne(matchId);
+      if (match)
+        return true;
+      else
+        return false;
     } };
   },
   
@@ -28,7 +32,25 @@ MatchController = RouteController.extend({
   
   data: function () {
     var match = Matches.findOne(this.params._id);
-    match.games = Games.find({match: this.params._id});
+    if (!match) return;
+    match.games = Games.find({match: this.params._id}).map(function(game, index){
+      game.index = index + 1;
+      return game;
+    });
+    match.club = Clubs.findOne(match.club);
+    match.club.members = match.club.members.sort(function(a,b) {
+      return b.rating - a.rating;
+    }).map(function(member, index) {
+      member.rank = index + 1;
+      return member;
+    });
+    for (player of match.players) {
+      player.profile = Meteor.users.findOne(player.user).profile;
+      player.membership = match.club.members.find(function(member) {
+        return member.user === player.user;
+      });
+      player.profile.image = Images.findOne(player.profile.image);
+    }
     return match;
   },
   

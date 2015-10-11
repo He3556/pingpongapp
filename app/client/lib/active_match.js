@@ -6,7 +6,9 @@ Meteor.startup(function() {
       status: "active"
     });
 
-    if (activeMatches.count() && Router.current() && Router.current().route.getName() !== "match") {
+    if (activeMatches.count()
+        && Router.current()
+        && Router.current().route.getName() !== "match") {
       Router.go("match", activeMatches.fetch().pop());
     }
 

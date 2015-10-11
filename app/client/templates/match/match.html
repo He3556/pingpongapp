@@ -6,8 +6,13 @@
       </div>
       <div id="menu-items" class="col-sm-5">
             {{#if currentUser}}
-                <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a> 
-                <a href=""><h2>Pause</h2></a>        
+                <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a>
+                {{#if isEquals status "active"}}
+                <a href="" class="pause"><h2>Pause</h2></a>
+                {{/if}}
+                {{#if isEquals status "paused"}}
+                <a href="" class="resume"><h2>Resume</h2></a>
+                {{/if}}
             {{else}}
                 {{> loginButtons}}
             {{/if}}
@@ -16,8 +21,8 @@
     <div id="club-dashboard-content" class="row">
       <div class="col-sm-5">
         <div class="member-profile">
-            <div class="col-sm-5 media user-profile-image"><img src="{{image.url}}"></div>
-            <div class="col-sm-7"><h3>{{opponent.name}}</h3><h4>{{numberizer opponent.rank}} place</h4></div>
+            <div class="col-sm-5 media user-profile-image"><img src="{{players.[0].profile.image.url}}"></div>
+            <div class="col-sm-7"><h3>{{players.[0].profile.name}}</h3><h4>{{numberizer players.[0].membership.rank}} place ({{players.[0].membership.rating}})</h4></div>
         </div>
       </div>
       <div class="col-sm-2">
@@ -25,25 +30,44 @@
       </div>
       <div class="col-sm-5">
         <div class="member-profile">
-            <div class="col-sm-5 media user-profile-image"><img src="{{image.url}}"></div>
-            <div class="col-sm-7"><h3>{{challenger.name}}</h3><h4>{{numberizer challenger.rank}} place</h4></div>
+            <div class="col-sm-5 media user-profile-image"><img src="{{players.[1].profile.image.url}}"></div>
+            <div class="col-sm-7"><h3>{{players.[1].profile.name}}</h3><h4>{{numberizer players.[1].membership.rank}} place ({{players.[1].membership.rating}})</h4></div>
         </div>
       </div>        
     </div>
     <div class="col-sm-6 col-sm-offset-3">  
-        <div id="club-dashboard-content" class="row">
-            <div class="leaderboard">
+            <div class="leaderboard container">
               <h2>Game Results</h2>
                 
-                <div id="game-list" class="row">
-                  <div class="col-xs-3"><input></div>
-                  <div class="col-xs-6"><h3>Game 1</h3></div>
-                  <div class="col-xs-3"><input></div>
+                <div id="game-list" class="text-center">
+                  {{#each games}}
+                  <div class="row">
+                    <div class="col-xs-3">{{players.[0].score}}</div>
+                    <div class="col-xs-6"><h3>Game {{index}}</h3></div>
+                    <div class="col-xs-3">{{players.[1].score}}</div>
+                  </div>
+                  {{/each}}
+                  {{#if isEquals status 'active'}}
+                  {{#autoForm id="addGame" type="insert" collection="Games"}}
+                    <div class="row">
+                      <div class="col-xs-3">
+                        {{>afQuickField name="players.0.score" label=false}}
+                      </div>
+                      <div class="col-xs-6">
+                        <h4><button type="submit" class="btn">Add Game</button></h4>
+                      </div>
+                      <div class="col-xs-3">
+                        {{>afQuickField name="players.1.score" label=false}}
+                      </div>
+                    </div>
+                  {{/autoForm}}
+                  <h4><a href="" class="submit-match">Submit Results</a></h4>
+                  {{else}}
+                    <h4>{{#linkTo route='clubDashboard' data=club}}Return to Club{{/linkTo}}</h4>
+                  {{/if}}
+
                 </div>
-                <h4><a href="">Add Game</a></h4>
-                <h4><a href="">Submit Results</a></h4>
             </div>
-        </div>
     </div>
   </div>
 </template>

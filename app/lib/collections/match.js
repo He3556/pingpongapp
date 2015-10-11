@@ -42,7 +42,7 @@ Schema.Match = new SimpleSchema({
       }
     }
   },
-  finishedAt: {
+  completedAt: {
     index: 1,
     type: Date,
     optional: true
@@ -58,7 +58,12 @@ if (Meteor.isServer) {
     },
 
     update: function (userId, doc, fieldNames, modifier) {
-      return false;
+      allowed = ['status', 'winner', 'completedAt'];
+      if (_.difference(fieldNames, allowed).length > 0) {
+        return false;
+      } else {
+        return true;
+      }
     },
 
     remove: function (userId, doc) {
@@ -72,7 +77,7 @@ if (Meteor.isServer) {
     },
 
     update: function (userId, doc, fieldNames, modifier) {
-      return true;
+      return false;
     },
 
     remove: function (userId, doc) {

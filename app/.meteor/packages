@@ -31,3 +31,4 @@ yogiben:autoform-file
 cfs:gridfs@=0.0.27
 cfs:standard-packages
 check
+momentjs:moment

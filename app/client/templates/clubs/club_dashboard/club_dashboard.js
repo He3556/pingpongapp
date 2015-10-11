@@ -56,6 +56,33 @@ Template.ClubDashboard.helpers({
       request.member = Meteor.users.findOne(request.user);
       return request;
     });
+  },
+
+  recentMatches: function() {
+    return Matches.find({ club: this.club._id, status: 'completed' }, {
+      sort: [['completedAt', "desc"]]
+    }).map(function(match) {
+      match.players.forEach(function(player) {
+        player.profile = Meteor.users.findOne(player.user).profile;
+      });
+
+      if (!match.winner) return match;
+
+      match.loser = Meteor.users.findOne({
+        $and: [
+          { _id: { $in: _.pluck(match.players, 'user') } },
+          { _id: { $ne: match.winner } }
+        ]
+      }).profile.name;
+      match.winner = Meteor.users.findOne(match.winner).profile.name;
+      return match;
+    });
+
+  },
+
+  dateFormat: function(date) {
+    console.log(date);
+    return moment(date).fromNow();
   }
 
 });
