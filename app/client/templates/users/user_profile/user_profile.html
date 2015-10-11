@@ -3,9 +3,9 @@
     <div id="nav" class="row">
       <div class="col-sm-6">
         {{#if isEquals _id currentUser._id}}
-            <h1>Your Profile</h1>
+            {{#linkTo route="clubList"}}<h1>Your Profile</h1>{{/linkTo}}
         {{else}}
-            <h1>{{profile.name}}'s Profile</h1>
+            {{#linkTo route="clubList"}}<h1>{{profile.name}}'s Profile</h1>{{/linkTo}}
         {{/if}}
       </div>
       <div id="menu-items" class="col-sm-5">

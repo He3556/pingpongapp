@@ -2,7 +2,7 @@
   <div class="club-dashboard container">
     <div id="nav" class="row">
       <div class="col-sm-6">
-          <h1>{{club.name}}</h1>
+          {{#linkTo route="clubList"}}<h1>{{club.name}}</h1>{{/linkTo}}
       </div>
       <div id="menu-items" class="col-sm-5">
             {{#if currentUser}}
@@ -19,6 +19,11 @@
           <div class="media user-profile-image"><img src="{{image.url}}"></div>
           <h3>{{profile.name}}</h3>
           <h3>{{rating}}</h3>
+        </div>
+        {{else}}
+        <div class="not-a-member-profile">
+          <h3>You are not a member of this club.</h3>
+          <h3><a href="{{pathFor route="myUserProfile"}}">Join</a></h3>
         </div>
         {{/with}}
         <div class="leaderboard">
