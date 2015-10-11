@@ -24,7 +24,9 @@ Schema.User = new SimpleSchema({
   },
   "emails.$.verified": {
     type: Boolean,
-    autoform: { omit: true }
+    autoValue: function() {
+      return false;
+    }
   },
   createdAt: {
     type: Date,

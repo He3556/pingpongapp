@@ -1,3 +1,15 @@
+AutoForm.hooks({
+  userProfile: {
+    onSuccess: function(formType, result) {
+      if (this.docId === Meteor.userId()) {
+        Router.go('myUserProfile');
+      } else {
+        Router.go('userProfile', {_id: this.docId});
+      }
+    }
+  }
+});
+
 /*****************************************************************************/
 /* UserProfileEdit: Event Handlers */
 /*****************************************************************************/

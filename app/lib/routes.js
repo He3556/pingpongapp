@@ -1,3 +1,6 @@
+Router.configure({
+  layoutTemplate: "MasterLayout"
+});
 
 Router.route('/', {
   name: 'clubList',
