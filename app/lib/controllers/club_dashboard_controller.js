@@ -24,6 +24,9 @@ ClubDashboardController = RouteController.extend({
   
   data: function () {
     var club = Clubs.findOne({slug: this.params.slug});
+    if (!club) {
+      return;
+    }
     return {
       club: club,
       me: club.members.filter(function(m){return m.user = Meteor.userId();}).pop(),
