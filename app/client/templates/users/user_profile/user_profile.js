@@ -10,6 +10,9 @@ Template.UserProfile.events({
 Template.UserProfile.helpers({
   clubs: function() {
     return Clubs.find({"members.user": this._id});
+  },
+  image: function() {
+    return Images.findOne(this.profile.image);
   }
 });
 
