@@ -6,6 +6,7 @@ Schema.UserProfile = new SimpleSchema({
   },
   image: {
     type: String,
+    optional: true,
     autoform: {
       afFieldInput: {
         type: 'fileUpload',
