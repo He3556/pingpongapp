@@ -33,7 +33,7 @@ Schema.Club = new SimpleSchema({
     },
     autoValue: function() {
       if (this.isInsert) {
-        return slugify(this.field('name'));
+        return slugify(this.field('name').value);
       }
     }
   },

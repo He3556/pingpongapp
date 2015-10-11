@@ -18,6 +18,10 @@
     @media #{$mq-lg}
       @content
 
+$black: #292930
+$white: #FCFCFC
+$blue: #439AE3
+    
 html
     min-height: 100%
 
@@ -48,11 +52,12 @@ h2
     
 a
     text-decoration: none
-    color: #fff
+    color: $white
     &:hover, &:focus
         text-decoration: none
+        color: darken($white, 20%)
 
-.club-list
+.club-list, .club-create
     max-width: 80%
 
 #nav
@@ -68,3 +73,24 @@ a
     margin-top: .35em
     @include mq(sm)
         margin-left: 3em
+        margin-top: .5em
+        
+#new-club
+    @extend #nav
+    h1
+        margin-left: 13% !important
+        
+.custom-form
+    background-color: $white
+    border-radius: 5px
+    color: $black
+    margin-top: 2em
+    form
+        margin: 2em 3em
+    label
+        font-size: 2em
+    button
+        font-size: 1.25em
+        background-color: $blue
+        border: none
+        
