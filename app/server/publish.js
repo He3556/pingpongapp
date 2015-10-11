@@ -5,5 +5,5 @@ Meteor.publish('allClubs', function(){
 
 Meteor.publish('myClubs', function(){
 	if(!this.userId) return this.ready();
-	return Clubs.find({members: {$in: [this.userId]}});
-})
+	return Clubs.find({}, {memebers: {$in: [this.userId]}});
+});
