@@ -33,7 +33,7 @@ Schema.Club = new SimpleSchema({
     },
     autoValue: function() {
       if (this.isInsert) {
-        return slugify(this.field('name'));
+        return slugify(this.field('name').value);
       }
     }
   },
@@ -54,10 +54,11 @@ Schema.Club = new SimpleSchema({
     label: 'Members',
     optional: false,
     autoValue: function() {
+      console.log(this);
       if (this.isInsert) {
-        return [this.userId];
+        return [{ user: this.userId, rating: 3}];
       } else if (this.isUpsert) {
-        return {$setOnInsert: [this.userId]};
+        return {$setOnInsert: [{ user: this.userId, rating: 3}] };
       }
     }
   },
@@ -75,7 +76,9 @@ Schema.Club = new SimpleSchema({
   memberCount: {
     type: Number,
     label: "Member Count",
-    denyInsert: true,
+    autoform: {
+      omit: true
+    },
     autoValue: function() {
       var members = this.field('members').value;
       if (!members) {
