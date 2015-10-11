@@ -35,8 +35,6 @@ UI.registerHelper('isClubOwner', function(club, userId) {
     userId = Meteor.userId();
   }
 
-  console.log(club.owners, userId);
-
   return club.owners.indexOf(userId) != -1;
 });
 
@@ -50,8 +48,6 @@ UI.registerHelper('isMember', function(club, userId) {
   if (typeof userId != 'string') {
     userId = Meteor.userId();
   }
-
-  console.log(club);
 
   return club.members.filter(function(member){
     return member.user === userId;

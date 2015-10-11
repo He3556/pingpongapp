@@ -54,7 +54,6 @@ Schema.Club = new SimpleSchema({
     label: 'Members',
     optional: false,
     autoValue: function() {
-      console.log(this);
       if (this.isInsert) {
         return [{ user: this.userId, rating: 3}];
       } else if (this.isUpsert) {

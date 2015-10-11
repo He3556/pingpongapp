@@ -12,6 +12,15 @@ Template.ClubDashboard.events({
 
   },
 
+  'click .leaderboard .challenge': function(e) {
+    e.preventDefault();
+
+    var club = Template.parentData(1).club;
+    var member = this.user;
+
+    Meteor.call('requestMatch', club, member);
+  },
+
   'click .pending-members .accept': function(e) {
     var rating = 1000;
     Meteor.call('approveClubRequest', this, rating);
@@ -29,6 +38,14 @@ Template.ClubDashboard.helpers({
   
   image: function() {
     return Images.findOne(this.profile.image);
+  },
+
+  isChallengePending: function() {
+    return Requests.find({
+      opponent: { $in: [this.user, Meteor.userId()] },
+      challenger: { $in: [this.user, Meteor.userId()] },
+      status: 'pending'
+    }).count() > 0;
   },
 
   pendingMemberRequests: function() {

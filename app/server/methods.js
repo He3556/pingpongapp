@@ -57,29 +57,71 @@ Meteor.methods({
     check(this.userId, String);
 
     if (typeof member === 'string')
-      member = Meteor.users.find(member)
+      member = Meteor.users.findOne(member)
 
     check(member, Object);
 
-    assert(this.userId !== member._id);
+    if (this.userId === member._id)
+      throw new Meteor.Error("You can't challenge yourself");
 
-    var club = Clubs.findOne({
-      _id: doc.club,
-      $and: [
-        { "members.user": this.userId },
-        { "members.user": member },
-      ]
-    });
+    if (typeof club == 'string')
+      club = Clubs.findOne(club);
 
     check(club, Object);
+
+    var memberIds = _.pluck(club.members, 'user');
+
+    if (memberIds.indexOf(member._id) === -1)
+      throw new Meteor.Error("You must challenge someone in this club.");
+
+    if (memberIds.indexOf(this.userId) === -1)
+      throw new Meteor.Error("You must be in this club to challenge.");
 
     Requests.insert({
       club: club._id,
       challenger: this.userId,
       opponent: member._id
     });
+  },
+
+  rejectMatch: function(requestId) {
+    request = Requests.findOne(requestId);
+    if (request.opponent != this.userId)
+      throw new Meteor.Error("You can't reject this request");
+
+    Requests.update(request._id, { $set: { status: 'rejected' } }); 
+  },
+
+  acceptMatch: function(requestId) {
+    request = Requests.findOne(requestId);
+    if (request.opponent != this.userId)
+      throw new Meteor.Error("You can't reject this request");
+
+    Requests.update(request._id, { $set: { status: 'accepted' } });
+
+    club = Clubs.findOne(request.club);
+
+    challenger = club.members.find(function(member) {
+      return member.user = request.challenger;
+    });
+    opponent = club.members.find(function(member) {
+      return member.user = request.opponent;
+    });
+
+    Matches.insert({
+      players: [
+        { user: request.challenger, expected: expected(challenger.rating, opponent.rating) },
+        { user: request.opponent, expected: expected(opponent.rating, challenger.rating) }
+      ],
+      club: request.club
+    });
+
   }
 
 
 
 });
+
+var expected = function(p1, p2) {
+  return 1 / (1 + Math.pow(10, (p2-p1)/400));
+}

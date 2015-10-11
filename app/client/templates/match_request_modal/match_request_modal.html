@@ -1,0 +1,24 @@
+<template name="MatchRequestModal">
+  {{#with pendingRequests}}
+  <div id="match-request-modal" role="dialog" class="modal slide show">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Match Requests</h4>
+      </div>
+      <div class="modal-body">
+        <ul>
+          {{#each pendingRequests}}
+            <li>
+              {{challenger.profile.name}}
+              <a href="#" class="accept text-success"><i class="glyphicon glyphicon-ok"></i></a>
+              <a href="#" class="reject text-danger"><i class="glyphicon glyphicon-remove"></i></a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+  {{/with}}
+</template>

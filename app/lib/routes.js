@@ -20,13 +20,6 @@ Router.route('/club/:slug', {
   where: 'client'
 });
 
-Router.route('/club/:slug/join', {
-  name: 'joinClub',
-  action: function() {
-  },
-  where: 'client'
-});
-
 Router.route('/user-profile', {
   name: 'myUserProfile',
   template: 'UserProfile',
@@ -43,5 +36,10 @@ Router.route('/user-profile/:_id', {
 Router.route('/user-profile/:_id/edit', {
   name: 'userProfileEdit',
   controller: 'UserProfileController',
+  where: 'client'
+});
+
+Router.route('/match/:_id', {
+  name: 'match',
   where: 'client'
 });
