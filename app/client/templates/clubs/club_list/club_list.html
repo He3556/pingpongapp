@@ -1,10 +1,10 @@
 <template name="ClubList">
   <div class="club-list container">
     <div id="nav" class="row">
-        <div class="col-xs-2">
+        <div class="col-sm-6">
             <h1>Clubs</h1>
         </div>
-        <div id="menu-items" class="col-xs-9">
+        <div id="menu-items" class="col-sm-5">
             {{#if currentUser}}
                 <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a> 
                 <a href="{{pathFor route="clubCreate"}}"><h2>Create Club</h2></a>        

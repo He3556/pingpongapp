@@ -71,21 +71,19 @@ a
     border-radius: 5px
     margin-top: 5em
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.3)
+    text-align: center
     h1
-        margin-left: 45%
+        @include mq(sm)
+            margin-left: 13%
+            text-align: left
     
 #menu-items a
-    float: right
-    margin-left: 1em
-    margin-top: .35em
+    text-align: center
     @include mq(sm)
+        text-align: none
+        float: right
         margin-left: 3em
         margin-top: .5em
-        
-#new-club
-    @extend #nav
-    h1
-        margin-left: 13% !important
         
 .long-block
     background-color: $white
@@ -126,21 +124,36 @@ a
 .member-profile
     @extend .long-block
 
-.leader-board
+.leaderboard
     @extend .long-block
     h2
         text-align: center
         font-weight: 600
         padding-top: 1em
+        @include mq(sm)
+            font-size: 1.25em
+        @include mq(md)
+            font-size: 1.5em
+        @include mq(lg)
+            font-size: 2em
+    h4
+        text-align: center
+        font-weight: 600
+        font-size: 1.5em
+        padding-bottom: 1em
 
 #club-dashboard-content
     padding: 0
     margin: 0 -30px
     
-#leader-board-players
-    margin: 0 0 2em 0
-    padding-bottom: 2em
+#leaderboard-players
+    margin: 0
+    padding-bottom: 1em
     div
         text-align: center
         padding: 0
         margin: 0 auto
+        &:first-child h3
+            font-weight: 700
+        &:last-child a
+            color: #E95A3C

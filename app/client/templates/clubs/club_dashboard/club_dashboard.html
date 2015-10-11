@@ -1,10 +1,10 @@
 <template name="ClubDashboard">
   <div class="club-dashboard container">
-    <div id="new-club" class="row">
+    <div id="nav" class="row">
       <div class="col-sm-6">
           <h1>{{club.name}}</h1>
       </div>
-      <div id="menu-items" class="col-xs-5">
+      <div id="menu-items" class="col-sm-5">
             {{#if currentUser}}
                 <a href=""><h2>Profile</h2></a> 
                 <a href=""><h2>Invite Players</h2></a>        
@@ -21,16 +21,17 @@
           <h3>{{rating}}</h3>
         </div>
         {{/with}}
-        <div class="leader-board">
+        <div class="leaderboard">
           <h2>Leaderboard</h2>
             {{#each leaders}}
-            <div id="leader-board-players" class="row">
+            <div id="leaderboard-players" class="row">
               <div class="col-xs-2"><h3>{{rank}}</h3></div>
               <div class="col-xs-4"><h3>{{profile.name}}</h3></div>
               <div class="col-xs-2"><h3>{{rating}}</h3></div>
-              <div class="col-xs-4"><h3>Challenge</h3></div>
+              <div class="col-xs-4"><h3><a href="">Challenge</a></h3></div>
             </div>
             {{/each}}
+          <h4>See More</h4>
         </div>
       </div>
     </div>
