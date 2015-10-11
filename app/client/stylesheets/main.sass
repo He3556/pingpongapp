@@ -238,3 +238,34 @@ a
     top: 0
     z-index: 2
     width: 100%
+    
+#match-request-modal
+    .modal-title
+        font-weight: 600
+        font-size: 2em
+    ul
+        list-style-type: none
+        padding: 0 0 0 1em
+        a
+            padding: 0 2em 2em 0
+            
+#vs-circle            
+    height: 50px
+    width: 50px
+    background-color: white
+    border-radius: 50%
+    text-align: center
+    margin: 0 auto
+    h4
+        padding-top: .8em
+    @include mq(sm)
+        margin: 4.5em auto 0
+        
+#game-list
+    @extend #leaderboard-players
+    margin-top: 2em
+    input
+        width: 20%
+    h3
+        margin: 0
+        

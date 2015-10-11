@@ -1,5 +1,49 @@
 <template name="Match">
-  <div class="match">
-    <h1>Match</h1>
+  <div class="match container">
+    <div id="nav" class="row">
+      <div class="col-sm-6">
+          <a href="{{pathFor route="clubList"}}"><h1>Match</h1></a>
+      </div>
+      <div id="menu-items" class="col-sm-5">
+            {{#if currentUser}}
+                <a href="{{pathFor route="myUserProfile"}}"><h2>Profile</h2></a> 
+                <a href=""><h2>Pause</h2></a>        
+            {{else}}
+                {{> loginButtons}}
+            {{/if}}
+        </div>
+    </div>
+    <div id="club-dashboard-content" class="row">
+      <div class="col-sm-5">
+        <div class="member-profile">
+            <div class="col-sm-5 media user-profile-image"><img src="{{image.url}}"></div>
+            <div class="col-sm-7"><h3>Nick Basile</h3><h4>{{numberizer 2}} place</h4></div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+          <div id="vs-circle"><h4>vs.</h4></div>
+      </div>
+      <div class="col-sm-5">
+        <div class="member-profile">
+            <div class="col-sm-5 media user-profile-image"><img src="{{image.url}}"></div>
+            <div class="col-sm-7"><h3>Tom Jones</h3><h4>{{numberizer 1}} place</h4></div>
+        </div>
+      </div>        
+    </div>
+    <div class="col-sm-6 col-sm-offset-3">  
+        <div id="club-dashboard-content" class="row">
+            <div class="leaderboard">
+              <h2>Game Results</h2>
+                
+                <div id="game-list" class="row">
+                  <div class="col-xs-3"><input></div>
+                  <div class="col-xs-6"><h3>Game 1</h3></div>
+                  <div class="col-xs-3"><input></div>
+                </div>
+                
+                <h4>Submit Results</h4>
+            </div>
+        </div>
+    </div>
   </div>
 </template>

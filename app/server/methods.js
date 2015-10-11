@@ -102,10 +102,10 @@ Meteor.methods({
     club = Clubs.findOne(request.club);
 
     challenger = club.members.find(function(member) {
-      return member.user = request.challenger;
+      return member.user === request.challenger;
     });
     opponent = club.members.find(function(member) {
-      return member.user = request.opponent;
+      return member.user === request.opponent;
     });
 
     Matches.insert({
